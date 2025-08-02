@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just for You 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top, #ffe3f0, #d0f0ff);
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .glow-btn {
+      padding: 15px 30px;
+      background: #ff69b4;
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff69b4;
+      animation: pulse 2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #ff69b4; }
+      50% { box-shadow: 0 0 30px #ff1493; }
+      100% { box-shadow: 0 0 10px #ff69b4; }
+    }
+
+    .love-message {
+      margin-top: 20px;
+      font-size: 1.6rem;
+      color: white;
+      max-width: 80%;
+      text-align: center;
+      opacity: 0;
+      transition: all 1.5s ease;
+      text-shadow: 0 0 10px #ff69b4;
+    }
+
+    .show-message {
+      opacity: 1;
+    }
+
+    .floating {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+
+    .butterfly, .leaf, .heart {
+      width: 40px;
+      height: 40px;
+      animation: floatUp 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    .butterfly {
+      background-image: url('https://i.postimg.cc/VLJp5LDb/butterfly.png');
+    }
+
+    .leaf {
+      background-image: url('https://i.postimg.cc/TwYrz2kK/leaf.png');
+    }
+
+    .heart {
+      background-image: url('https://i.postimg.cc/nV3PKdgn/heart.png');
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    .tree {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      width: 200px;
+      height: 200px;
+      background: url('https://i.postimg.cc/MKmM4mpy/tree.png') no-repeat center/contain;
+    }
+
+    .cat {
+      position: absolute;
+      bottom: 0;
+      left: 100px;
+      width: 100px;
+      height: 100px;
+      background: url('https://i.postimg.cc/Jn0NmTn9/cat.png') no-repeat center/contain;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 1rem;
+      text-shadow: 0 0 5px #ff1493;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="glow-btn" onclick="revealLove()">Tap to Reveal the Magic ✨</button>
+  <div class="love-message" id="msg">
+    "You're not just a part of my life — you're the most beautiful chapter of it. 🌸"
+  </div>
+
+  <!-- Scene elements -->
+  <div class="tree"></div>
+  <div class="cat"></div>
+
+  <footer>Made with magic & love 💖</footer>
+
+  <!-- Optional Music -->
+  <audio id="bgm" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function revealLove() {
+      document.getElementById("msg").classList.add("show-message");
+      document.querySelector(".glow-btn").style.display = "none";
+      document.getElementById("bgm").play();
+    }
+
+    function spawn(className) {
+      const el = document.createElement("div");
+      el.className = `floating ${className}`;
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.animationDuration = 5 + Math.random() * 10 + "s";
+      el.style.transform = `scale(${0.5 + Math.random()})`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 15000);
+    }
+
+    setInterval(() => {
+      const options = ["butterfly", "leaf", "heart"];
+      spawn(options[Math.floor(Math.random() * options.length)]);
+    }, 800);
+  </script>
+
+</body>
+</html>
